@@ -3,8 +3,18 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import *
 import os
 import models
+
+
+metadata = Base.metadata
+place_amenity = Table('place_amenity', metadata,
+                      Column('place_id', String(60), ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -22,6 +32,7 @@ class Place(BaseModel, Base):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
+
     __tablename__ = 'places'
 
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -34,10 +45,13 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float)
     longitude = Column(Float)
+    amenity_ids = []
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", cascade="all, delete, delete-orphan",
                                backref="place")
+        amenities = relationship("Amenity", secondary=place_amenity,
+                                 viewonly=False)
     else:
         @property
         def reviews(self):
@@ -46,3 +60,12 @@ class Place(BaseModel, Base):
                 if val.place_id == self.id:
                     my_list.append(val)
             return(my_list)
+
+        @property
+        def amenities(self):
+            return(self.amenity_ids)
+
+        @amenities.setter
+        def amenities(self, obj):
+            if type(obj) is Amenity and obj.id not in self.amenity_ids:
+                amenity_ids.append(obj.id)
