@@ -64,7 +64,7 @@ class DBStorage:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 my_dict[key] = obj
         else:
-            lista = [State, City, User, Place]
+            lista = [State, City, User, Place, Review]
             for _class in lista:
                 query = self.__session.query(_class)
                 for obj in query:
