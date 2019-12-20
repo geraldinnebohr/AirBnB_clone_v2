@@ -43,8 +43,19 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
-            obj.save()
             print("{}".format(obj.id))
+            for algo in range(1, len(my_list)):
+                my_list[algo] = my_list[algo].replace("=", " ")
+                my_list2 = split(my_list[algo])
+                my_list2[1] = my_list2[1].replace("_", " ")
+                try:
+                    loqsea = eval(my_list2[1])
+                    my_list2[1] = loqsea
+                except:
+                    pass
+                if type(my_list2[1]) is not tuple:
+                    setattr(obj, my_list2[0], my_list2[1])
+            obj.save()
         except SyntaxError:
             print("** class name missing **")
         except NameError:
