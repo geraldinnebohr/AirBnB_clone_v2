@@ -59,6 +59,8 @@ class TestReview(unittest.TestCase):
         self.assertEqual(type(self.rev.place_id), str)
         self.assertEqual(type(self.rev.user_id), str)
 
+    @unittest.skipIF(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Not save for place\
+    in database')
     def test_save_Review(self):
         """test if the save works"""
         self.rev.save()

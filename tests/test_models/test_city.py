@@ -56,6 +56,8 @@ class TestCity(unittest.TestCase):
         self.assertEqual(type(self.city.name), str)
         self.assertEqual(type(self.city.state_id), str)
 
+    @unittest.skipIF(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Not save for city\
+    in database')
     def test_save_City(self):
         """test if the save works"""
         self.city.save()

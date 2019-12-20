@@ -52,6 +52,8 @@ class TestBaseModel(unittest.TestCase):
         """test if the base is an type BaseModel"""
         self.assertTrue(isinstance(self.base, BaseModel))
 
+    @unittest.skipIF(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Not save for base_model\
+    database')
     def test_save_BaesModel(self):
         """test if the save works"""
         self.base.save()
