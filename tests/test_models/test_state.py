@@ -53,8 +53,8 @@ class TestState(unittest.TestCase):
         """test attribute type for State"""
         self.assertEqual(type(self.state.name), str)
 
-    @unittest.skipIF(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Not save for state\
-    in database')
+    @unittest.skipIf(os.getenv("BNB_TYPE_STORAGE") == "db",
+                     "Not save for state in database")
     def test_save_State(self):
         """test if the save works"""
         self.state.save()
