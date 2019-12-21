@@ -53,8 +53,6 @@ class TestAmenity(unittest.TestCase):
         """test attribute type for Amenity"""
         self.assertEqual(type(self.amenity.name), str)
 
-    @unittest.skipIF(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Not save for amenity\
-    in database')
     def test_save_Amenity(self):
         """test if the save works"""
         self.amenity.save()

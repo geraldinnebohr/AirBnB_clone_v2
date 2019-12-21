@@ -4,10 +4,10 @@ import unittest
 import pep8
 
 
-class Testdbstorage(unittest.TestCase):
-    '''this will test the FileStorage'''
+class TestDBStorage(unittest.TestCase):
+    '''this will test the DBStorage'''
 
-    def test_pep8_FileStorage(self):
+    def test_pep8_DBStorage(self):
         """Tests pep8 style"""
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(['models/engine/db_storage.py'])
