@@ -30,8 +30,7 @@ def do_deploy(archive_path):
     try:
         put(archive_path, '/tmp/')
         filename = re.search('versions/(.*).tgz', archive_path)
-        run('mkdir -p /data/web_static/releases/{}'.format(filename.group(1\
-)))
+        run('mkdir -p /data/web_static/releases/{}'.format(filename.group(1)))
         run('tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}'
             .format(filename.group(1), filename.group(1)))
         run('rm /tmp/{}.tgz'.format(filename.group(1)))
