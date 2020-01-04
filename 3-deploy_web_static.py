@@ -15,8 +15,8 @@ def do_pack():
         local("mkdir -p versions")
         time = datetime.now()
         date = time.strftime("%Y%m%d%H%M%S")
-        path = "versions/web_static_" + date
-        local("tar -cvzf {}.tgz web_static".format(path))
+        path = "versions/web_static_" + date + ".tgz"
+        local("tar -cvzf {} web_static".format(path))
         return path
     except:
         return None
