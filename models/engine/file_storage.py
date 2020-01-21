@@ -28,7 +28,7 @@ class FileStorage:
         if cls:
             objs = {}
             for key, val in self.__objects.items():
-                if type(val).__name__ == cls.__class__.__name__:
+                if type(val).__name__ == cls.__name__:
                     objs[key] = val
             return objs
         else:
