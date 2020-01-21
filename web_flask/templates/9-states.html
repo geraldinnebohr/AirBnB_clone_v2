@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HBNB</title>
+    </head>
+    <body>
+        {% if id == None %}
+        <h1>States</h1>
+	<ul>
+	{% for state in list2 %}
+	    <li>{{ state.1 }}: <b>{{ state.0 }}</b></li>
+	{% endfor %}
+	</ul>
+	{% elif s_name != None %}
+	<h1>State: {{ s_name }}</h1>
+	<h3>Cities:</h3>
+	<ul>
+	{% for city in city_list %}
+	{%- if city.2 == id %}
+	    <li>{{ city.1 }}: <b>{{ city.0 }}</b></li>
+	{% endif -%}
+	{% endfor %}
+	</ul>
+	{% else %}
+	<h1>Not found!</h1>
+	{% endif %}
+    </body>
+</html>
