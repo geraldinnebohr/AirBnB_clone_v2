@@ -41,25 +41,10 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """query on the current database session
-
-       clas_list = [State, City, User, Place]
-        query = []
-        if cls is None:
-            for yo in clas_list:
-                query.append(self.__session.query(yo).all())
-            another_list = [x for sublist in query for x in sublist]
-        else:
-            another_list = self.__session.query(cls).all()
-        my_dict = {}
-        for ki in another_list:
-            la_ki = ki.to_dict()['__class__'] + "." + getattr(ki, 'id')
-            my_dict[la_ki] = ki
-        return my_dict
-"""
+        """query on the current database session"""
         my_dict = {}
         if cls:
-            query = self.__session.query(cls)
+            query = self.__session.query(eval(cls))
             for obj in query:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 my_dict[key] = obj
@@ -97,7 +82,5 @@ class DBStorage:
         self.__session = session()
 
     def close(self):
-        """close method"""
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        session = scoped_session(Session)
-        self.__session = self.remove()
+        """close session method"""
+        self.__session.close()
