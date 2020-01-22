@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="../../styles/4-common.css">
-    <link rel="stylesheet" type="text/css" href="../../styles/3-header.css">
-    <link rel="stylesheet" type="text/css" href="../../styles/3-footer.css">
-    <link rel="stylesheet" type="text/css" href="../../styles/6-filters.css">
-    <link rel="icon" href="../../images/icon.png" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link rel="icon" href="../static/images/icon.png" />
     <title>HBnB</title>
   </head>
   <body>
@@ -19,35 +19,30 @@
 	      <h4>&nbsp;</h4>
 	        <div class="popover">
 		      <ul>
-			      <li>
-				<h2>Arizona:</h2>
-				<ul>
-				    <li>Pheonix</li>
-				      <li>Sedona</li>
-				      </ul>
-				      </li>
-			            <li>
-				      <h2>California:</h2>
-				      <ul>
-					  <li>LA</li>
-					    <li>SF</li>
-					    </ul>
-				            </li>
-				        </ul>
-		        </div>
-		</div>
+                        {% for state in list2 %}
+                        <h2>{{ state.0 }}</h2>
+                            <ul>
+                                {% for city in city_list %}
+                                {%- if city.2 == state.1 %}
+                                <li>{{ city.0 }}</li>
+                                {% endif -%}
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
+        </div>
 	<div class="amenities">
 	    <h3>Amenities</h3>
 	      <h4>&nbsp;</h4>
 	        <div class="popover">
-		      <ul>
-			      <li>Internet</li>
-			            <li>TV</li>
-				          <li>Kitchen</li>
-					        <li>Iron</li>
-						    </ul>
-		        </div>
-		</div>
+		       <ul>
+                        {% for amenity in list_amenities %}
+                        <li>{{ amenity }}</li>
+			{% endfor %}
+                    </ul>
+                </div>
+        </div>
 	<button type="button">Search</button>
       </section>
     </div>
